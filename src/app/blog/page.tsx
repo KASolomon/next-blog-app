@@ -1,8 +1,12 @@
+
+import BlogGrid from '@/components/blog/BlogGrid'
 import React from 'react'
 
 const BlogPage = () => {
   return (
-    <div>BlogPage</div>
+    <div>
+<BlogGrid/>
+    </div>
   )
 }
 
