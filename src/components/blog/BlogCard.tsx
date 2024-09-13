@@ -25,10 +25,10 @@ const BlogCard = ({blogItem}:Props) => {
 
         <h3 className='text-3xl font-bold'>{blogItem.title}</h3>
         <p className='text-lg text-gray-500'>{blogItem.description}</p>
-        <Link href="/" className='underline'>READ MORE</Link>
+        <Link href="/blog/post" className='underline'>READ MORE</Link>
       </div>
       <div className="flex flex-col justify-center ">
-        <p style={{ transform: "rotate(90deg)" }}>Date</p>
+        <p style={{ transform: "rotate(270deg)" }}>Date</p>
       </div>
     </div>
   );
