@@ -1,19 +1,7 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import Navbar from "@/components/navbar/Navbar";
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Cloud Blog",
@@ -31,13 +19,12 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased   `}
       >
         <div
           className={
-            "flex flex-col space-between min-h-screen mx-auto my-4 justify-between"
+            "flex flex-col space-between min-h-screen mx-auto my-4 justify-between w-5/6"
           }
-          style={{ width: "90%" }}
+
         >
           <Navbar />
           {children}
