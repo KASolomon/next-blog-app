@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 const ContactPage = () => {
   return (
-    <div className="flex ">
+    <div className="flex flex-col my-10  lg:flex-row ">
       <div className=" flex-1 ">
         <div className="relative w-3/4 h-3/4 m-auto">
           <Image src={"/contact.png"} alt="contactImg" fill />
