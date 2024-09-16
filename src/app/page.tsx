@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col text-center items-center lg:flex-row lg:text-left">
-      <div className="flex flex-col items-center lg:items-start flex-1 gap-12">
-        <h1 className="text-8xl font-bold">Creative Thoughts Agency.</h1>
+    <div className="flex flex-col text-center lg:flex-row lg:text-left">
+      <div className="flex flex-col lg:items-start flex-1 gap-12 my-6">
+        <h1 className="text-6xl font-bold">Creative Thoughts Agency.</h1>
         <p className="text-xl">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis
           similique consequuntur ipsam laudantium, atque distinctio aliquid
@@ -13,8 +13,8 @@ export default function Home() {
           molestiae, eligendi temporibus cupiditate saepe.
         </p>
         <HomeButtons />
-        <div className="relative w-3/4 min-h-20">
-          <Image src={"/brands.png"} alt="" fill className="grayscale" />
+        <div className="relative w-full h-full max-h-16 lg:w-3/4 min-h-16 ">
+          <Image src={"/brands.png"} alt="" fill className="grayscale m-auto min-w-36" />
         </div>
       </div>
       <div className=" flex-1" style={{ height: " 50rem", }} >
