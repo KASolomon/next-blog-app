@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col text-center lg:flex-row lg:text-left">
-      <div className="flex flex-col lg:items-start flex-1 gap-12 my-6">
+    <div className="flex flex-col text-center lg:flex-row lg:text-left lg:items-center">
+      <div className="flex flex-col flex-1 gap-12 my-6">
         <h1 className="text-6xl font-bold">Creative Thoughts Agency.</h1>
         <p className="text-xl">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis
