@@ -1,5 +1,11 @@
 import React from "react";
 import Image from "next/image";
+
+export const metadata = {
+  title : 'About',
+  description : 'Learn about the creative ideas agency'
+}
+
 const AboutPage = () => {
   return (
     <div className=" my-10 flex flex-col lg:flex-row lg:text-left text-center items-center">
