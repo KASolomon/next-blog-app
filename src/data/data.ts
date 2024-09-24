@@ -18,7 +18,7 @@ export const getPosts = async ()=>{
 export const getPost = async (slug:string)=>{
     try {
         connectToMongo();
-        const post = await Posts.findOne({slug}).exec()
+        const post = await Posts.findOne({slug}).populate('author').exec()
         return post
         
     } catch (error) {
