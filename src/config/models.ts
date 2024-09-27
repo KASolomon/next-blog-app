@@ -1,4 +1,4 @@
-import mongoose, {  SchemaTypes } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
     username : {
@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema({
     },
     password : {
         type : String,
-        required : true,
         min : 6
     },
     isAdmin : {
@@ -37,7 +36,7 @@ const postsSchema = new mongoose.Schema(
       required: true,
     },
     author: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref : 'users',
       required : true
     },
@@ -51,5 +50,5 @@ const postsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Users = mongoose.models.users || mongoose.model('users',userSchema)
-export const Posts = mongoose.models.posts || mongoose.model("posts", postsSchema);
+export const Users = mongoose.models?.users || mongoose.model('users',userSchema)
+export const Posts = mongoose.models?.posts || mongoose.model("posts", postsSchema);
