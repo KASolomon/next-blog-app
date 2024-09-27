@@ -12,8 +12,21 @@ export const handleGoogleSignIn = async () => {
   await signIn("google");
   console.log(await auth());
 };
+
+export const handleCredentialsSignIn = async (formData:FormData)=>{
+
+  try {
+    await signIn('credentials', formData)
+    
+  } catch (error) {
+    console.log('Credentials validation failed')
+    //Show user feedback when validation fails
+  }
+console.log(await auth());
+}
+
 export const handleSignOut = async () => {
-  await signOut({redirectTo:'/'});
+  await signOut({redirectTo:'/login'});
 
 };
 
