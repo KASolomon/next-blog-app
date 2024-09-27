@@ -45,10 +45,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           const user = await Users.findOne({ username }).exec();
           console.log(user, "Mongo User");
           if (user) {
-            const valid = await bcrypt.compare(password.toString(), user.password)
-            return valid
+            return bcrypt.compare(password, user.password).then(res=>{
+              console.log(res, 'Result')
+              return res
               ? { username: user.username, email: user.email, _id: user._id }
-              : null;
+              : null})
+            
           }
         } catch (error) {
           console.log(error);

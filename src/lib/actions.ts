@@ -15,13 +15,7 @@ export const handleGoogleSignIn = async () => {
 
 export const handleCredentialsSignIn = async (formData:FormData)=>{
 
-  try {
-    await signIn('credentials', formData)
-    
-  } catch (error) {
-    console.log('Credentials validation failed')
-    //Show user feedback when validation fails
-  }
+  await signIn('credentials', formData)
 console.log(await auth());
 }
 
