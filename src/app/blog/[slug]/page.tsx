@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Suspense } from "react";
-import { getPost, getUser } from "@/data/data";
+import { getPost, getUser } from "@/lib/data";
 interface Props {
   params: { [key: string]: string };
   searchParams: { [key: string]: string };
@@ -26,13 +26,13 @@ interface Props {
 //   }
 // }
 
-export const generateMetadata = async ({params}:Props)=>{
+export const generateMetadata = async ({ params }: Props) => {
   const currentPost = await getPost(params.slug);
   return {
-    title : currentPost.title,
-    description : currentPost.description
-  }
-}
+    title: currentPost.title,
+    description: currentPost.description,
+  };
+};
 
 const SinglePost = async ({ params }: Props) => {
   const currentPost = await getPost(params.slug);
@@ -54,24 +54,26 @@ const SinglePost = async ({ params }: Props) => {
           <h1 className="text-5xl font-bold">{currentPost.title}</h1>
         </div>
         <div className="flex  items-center gap-20">
-         
-            <div
-              style={{
-                position: "relative",
-                width: "100px",
-                height: "100px",
-                overflow: "hidden",
-                borderRadius: "50%",
-              }}
-            >
-              <Image
-                src={currentPost.author.img ? currentPost.author.img : '/noavatar.png'}
-                alt=""
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-
+          <div
+            style={{
+              position: "relative",
+              width: "100px",
+              height: "100px",
+              overflow: "hidden",
+              borderRadius: "50%",
+            }}
+          >
+            <Image
+              src={
+                currentPost.author.img
+                  ? currentPost.author.img
+                  : "/noavatar.png"
+              }
+              alt=""
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </div>
 
           <div>
             <p className="text-gray-400 text-2xl">Author</p>

@@ -2,15 +2,15 @@ import React from "react";
 import BlogCard from "./BlogCard";
 import appAxios from "@/config/appAxios";
 import { ObjectId } from "mongoose";
-import { getPosts } from "@/data/data";
+import { getPosts } from "@/lib/data";
 
-export interface Post{
-  author : ObjectId,
-  id : ObjectId,
-  title : string,
-  description : string,
-  img : string,
-  slug : string
+export interface Post {
+  author: ObjectId;
+  id: ObjectId;
+  title: string;
+  description: string;
+  img: string;
+  slug: string;
 }
 // const getPosts = async ()=>{
 //   try{
@@ -23,8 +23,7 @@ export interface Post{
 // }
 
 const BlogGrid = async () => {
-
-  const blogPosts : Post[] = await getPosts()
+  const blogPosts: Post[] = await getPosts();
   // const blogPosts = [
   //   {
   //     title: "First Blog Post",
@@ -101,13 +100,13 @@ const BlogGrid = async () => {
   // ];
   return (
     <div
-className=" py-6 my-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+      className=" py-6 my-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
       style={{
         display: "grid",
-        placeContent : 'center',
-        position : 'relative',
-        columnGap : '30px',
-        rowGap : '45px'
+        placeContent: "center",
+        position: "relative",
+        columnGap: "30px",
+        rowGap: "45px",
       }}
     >
       {blogPosts.map((post) => (
