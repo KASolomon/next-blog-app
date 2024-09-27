@@ -1,14 +1,18 @@
 import React from "react";
 import NavLink from "./NavLink";
-const Links = () => {
+import { auth, signOut } from "@/lib/auth";
+import { handleSignOut } from "@/lib/actions";
+import Logout from "./Logout";
+
+const Links = async () => {
   const links = [
     { title: "Home", href: "/" },
     { title: "About", href: "/about" },
     { title: "Contact", href: "/contact" },
     { title: "Blog", href: "/blog" },
   ];
-  const isAuthenticated = true;
-  const isAdmin = true;
+  const isAuthenticated = await auth();
+  const isAdmin = false;
   return (
     <>
       {links.map((link) => (
@@ -16,11 +20,14 @@ const Links = () => {
       ))}
       {isAuthenticated ? (
         <>
-          {isAdmin && <NavLink navlink={{ title: "Admin", href: "/admin" }} />}
-          <NavLink
-            className={"bg-white rounded-md text-bgSoft"}
-            navlink={{ href: "/logout", title: "Logout" }}
-          />
+          {isAdmin && (
+            <NavLink
+              className={"bg-white rounded-md text-bgSoft"}
+              navlink={{ title: "Admin", href: "/admin" }}
+            />
+          )}
+          {/* <NavLink navlink={{ href: "/logout", title: "Logout" }} /> */}
+          <Logout/>
         </>
       ) : (
         <>
