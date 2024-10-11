@@ -1,7 +1,9 @@
 import HomeButtons from "@/components/home/HomeButtons";
+import { auth } from "@/lib/auth";
 import Image from "next/image";
 
-export default function Home() {
+const  page =  async ()=> {
+  console.log(await auth());
   return (
     <div className="flex flex-col text-center lg:flex-row lg:text-left lg:items-center">
       <div className="flex flex-col flex-1 gap-12 my-6">
@@ -27,3 +29,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default page
