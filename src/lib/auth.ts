@@ -54,7 +54,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             return bcrypt.compare(password, user.password).then((res) => {
               console.log(res, "Result");
               return res
-                ? { username: user.username, email: user.email, _id: user._id }
+                ? { username: user.username, email: user.email, _id: user._id, isAdmin : user.isAdmin }
                 : null;
             });
           }
