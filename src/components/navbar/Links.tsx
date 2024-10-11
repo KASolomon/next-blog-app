@@ -14,14 +14,13 @@ const Links = async () => {
   ];
   const isAuthenticated = await auth();
   const isAdmin = false;
-  
 
   return (
     <>
       {links.map((link) => (
         <NavLink navlink={link} key={link.href} />
       ))}
-     <NavAuthButtons isAuthenticated ={isAuthenticated}/>
+      <NavAuthButtons userSession={isAuthenticated} />
     </>
   );
 };
