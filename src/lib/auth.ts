@@ -1,60 +1,65 @@
 import connectToMongo from "@/config/dbConn";
 import { Users } from "@/config/models";
 import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
+import { AccessDenied } from "@auth/core/errors";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { JWT } from "next-auth/jwt";
+import authConfig from "./authConfig";
 declare module "next-auth" {
   interface User {
-
+    email?: string | null;
     _id?: string;
     username?: string;
+    isAdmin?: boolean;
   }
   interface Session {
-user:{
-email ?: string |null;
-  _id?: string;
-  username?: string;
-}
+    user: {
+      _id?: string;
+      username?: string;
+      email ?: string | null; 
+      isAdmin ?: boolean
+    } & DefaultSession["user"];
   }
 }
 declare module "next-auth/jwt" {
   interface JWT {
-
     _id?: string;
     username?: string;
+    email ?: string | null; 
+     isAdmin ?: boolean
   }
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   providers: [
     GitHub,
     Google,
     Credentials({
-      credentials: {
-        username: {},
-        password: {},
-      },
-      authorize: async ({ username, password }) => {
-        console.log(username, "username");
-        console.log(password, "pwd");
+      authorize: async ({
+        username,
+        password,
+      }: Partial<Record<string, unknown>>) => {
         try {
           connectToMongo();
           const user = await Users.findOne({ username }).exec();
-          console.log(user, "Mongo User");
-          if (user) {
-            return bcrypt.compare(password, user.password).then(res=>{
-              console.log(res, 'Result')
+
+          if (user === null) {
+            console.log("User not found");
+            return null;
+          } else {
+            return bcrypt.compare(password, user.password).then((res) => {
+              console.log(res, "Result");
               return res
-              ? { username: user.username, email: user.email, _id: user._id }
-              : null})
-            
+                ? { username: user.username, email: user.email, _id: user._id }
+                : null;
+            });
           }
-        } catch (error) {
-          console.log(error);
-          // throw new Error('Error validating user credentials')
+        } catch (error: any) {
+          return null;
         }
       },
     }),
@@ -71,14 +76,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               username: user.name,
             });
           }
-          return true;
-        } else {
-          console.log("User account does not have an email.");
-          return false;
         }
+        return true;
+        // return false
       } catch (error) {
-        console.log(error);
+        console.log(error, "From within signin callback");
         return false;
+        // throw new AuthError("Something went wrong.")
       }
     },
     async jwt({ token, user }) {
@@ -88,14 +92,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.username = user.username;
         if (user.email == null) token.email = undefined;
         token.email = user.email;
+        token.isAdmin = user.isAdmin
       }
       return token;
     },
     async session({ session, token }) {
       session.user._id = token._id;
       session.user.username = token.username;
-      session.user.email = token.email;
+      session.user.email = token?.email;
+      session.user.isAdmin = token?.isAdmin
       return session;
     },
+    ...authConfig.callbacks
   },
 });
