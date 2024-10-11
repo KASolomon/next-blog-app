@@ -1,7 +1,6 @@
 import GithubLogin from "@/components/login/GithubLogin";
 import LoginForm from "@/components/login/LoginForm";
 import {
-  handleGithubSignIn,
   handleGoogleSignIn
 } from "@/lib/actions";
 import { auth } from "@/lib/auth";
@@ -12,7 +11,7 @@ export const metadata ={
 }
 
 const LoginPage = async () => {
-console.log(await auth(), 'From login page')
+
 
   return (
     <div

@@ -15,7 +15,7 @@ const Links = async () => {
   const isAuthenticated = await auth();
   const isAdmin = false;
   
-  console.log(isAuthenticated, 'From navbar')
+
   return (
     <>
       {links.map((link) => (
