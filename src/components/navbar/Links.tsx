@@ -3,6 +3,7 @@ import NavLink from "./NavLink";
 import { auth, signOut } from "@/lib/auth";
 import { handleSignOut } from "@/lib/actions";
 import Logout from "./Logout";
+import NavAuthButtons from "../login/NavAuthButtons";
 
 const Links = async () => {
   const links = [
@@ -13,27 +14,14 @@ const Links = async () => {
   ];
   const isAuthenticated = await auth();
   const isAdmin = false;
+  
+  console.log(isAuthenticated, 'From navbar')
   return (
     <>
       {links.map((link) => (
         <NavLink navlink={link} key={link.href} />
       ))}
-      {isAuthenticated ? (
-        <>
-          {isAdmin && (
-            <NavLink
-              className={"bg-white rounded-md text-bgSoft"}
-              navlink={{ title: "Admin", href: "/admin" }}
-            />
-          )}
-          {/* <NavLink navlink={{ href: "/logout", title: "Logout" }} /> */}
-          <Logout/>
-        </>
-      ) : (
-        <>
-          <NavLink navlink={{ href: "/login", title: "Login" }} />
-        </>
-      )}
+     <NavAuthButtons isAuthenticated ={isAuthenticated}/>
     </>
   );
 };
