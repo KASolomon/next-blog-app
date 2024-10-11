@@ -1,17 +1,19 @@
-"use client"
-import { handleGithubSignIn } from '@/lib/actions'
-import React from 'react'
-import { useFormState } from 'react-dom';
-import { AuthFormState } from '../register/RegisterForm';
+"use client";
+import { handleGithubSignIn } from "@/lib/actions";
+import React from "react";
+import { useFormState } from "react-dom";
+import { AppFormState } from "../register/RegisterForm";
 import FormStateMessage from "../form/FormStateMessage";
 
 const GithubLogin = () => {
-     const [githubFormState, modifiedGithubSignIn] =
-       useFormState<AuthFormState>(handleGithubSignIn, {
-         success: false,
-         error: false,
-         message: "",
-       });
+  const [githubFormState, modifiedGithubSignIn] = useFormState<AppFormState>(
+    handleGithubSignIn,
+    {
+      success: false,
+      error: false,
+      message: "",
+    }
+  );
   return (
     <form action={modifiedGithubSignIn} className="flex justify-center">
       <button
@@ -20,9 +22,9 @@ const GithubLogin = () => {
       >
         Github Login
       </button>
-      <FormStateMessage state={githubFormState}/> 
+      <FormStateMessage state={githubFormState} />
     </form>
   );
-}
+};
 
-export default GithubLogin
+export default GithubLogin;

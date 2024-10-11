@@ -3,12 +3,12 @@ import { handleCredentialsSignIn, handleGithubSignIn } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useFormState } from "react-dom";
-import { AuthFormState } from "../register/RegisterForm";
+import { AppFormState } from "../register/RegisterForm";
 import FormStateMessage from "../form/FormStateMessage";
 
 const LoginForm = () => {
   const [state, modifiedCredentialsSignIn] = useFormState<
-    AuthFormState,
+    AppFormState,
     FormData
   >(handleCredentialsSignIn, { success: false, error: false, message: "" });
 

@@ -1,10 +1,10 @@
-import React from 'react'
-import { AuthFormState } from '../register/RegisterForm';
+import React from "react";
+import { AppFormState } from "../register/RegisterForm";
 
-interface Props{
-    state:AuthFormState
+interface Props {
+  state: AppFormState;
 }
-const FormStateMessage = ({state}:Props) => {
+const FormStateMessage = ({ state }: Props) => {
   return (
     <p
       className={`text-center font-bold ${state?.success && "text-green-600"} ${
@@ -14,6 +14,6 @@ const FormStateMessage = ({state}:Props) => {
       {state?.message}
     </p>
   );
-}
+};
 
-export default FormStateMessage
+export default FormStateMessage;

@@ -4,14 +4,13 @@ import React from "react";
 import { useFormState } from "react-dom";
 import FormStateMessage from "../form/FormStateMessage";
 
-export interface AuthFormState {
+export interface AppFormState {
   error?: boolean;
   success?: boolean;
   message: string;
 }
 const RegisterForm = () => {
-
-  const [state, modifiedRegisterAction] = useFormState<AuthFormState, FormData>(
+  const [state, modifiedRegisterAction] = useFormState<AppFormState, FormData>(
     handleRegister,
     { success: false, error: false, message: "" }
   );
@@ -58,7 +57,7 @@ const RegisterForm = () => {
           Register
         </button>
       </div>
-     <FormStateMessage state={state} />
+      <FormStateMessage state={state} />
     </form>
   );
 };
